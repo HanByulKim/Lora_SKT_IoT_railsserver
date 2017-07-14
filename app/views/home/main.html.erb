@@ -1,4 +1,8 @@
 <a>hello</a>
 <p>start</p>
-<p><%=@res%></p>
+
+<% @posted.each_do |i| %>
+    <%= i.content %>
+<% end %>
+
 <p>end</p>

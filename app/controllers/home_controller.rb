@@ -1,5 +1,6 @@
 class HomeController < ApplicationController
-    
+    require 'rest-client'
+
     def main
         uri = URI('https://thingplugpf.sktiot.com:9443/0240771000000174/v1_0/remoteCSE-00000174d02544fffef01031/container-LoRa/latest')
        # http = Net::HTTP.new(uri.host, uri.port)
@@ -8,14 +9,13 @@ class HomeController < ApplicationController
     #    @res = Net::HTTP::Get.new("https://thingplugpf.sktiot.com:9443/0240771000000174/v1_0/remoteCSE-00000174d02544fffef01031/container-LoRa/latest")
 
 
-        Net::HTTP.start(uri.host, uri.port) do |http|
-          request = Net::HTTP::Get.new(uri.request_uri)
+        #Net::HTTP.start(uri.host, uri.port) do |http|
+        #  request = Net::HTTP::Get.new(uri.request_uri)
         
           #request = http.request request # Net::HTTPResponse object
-        end
+        #end
         
-        @res=request
-
-
+        #@res=request
+        @posted = Req.all
     end
 end
