@@ -7,6 +7,9 @@
         var map;
         var mapW, mapH;     // 지도의 가로, 세로 크기(Pixel단위) 를 지정 합니다. 
         var cLonLat, zoom;      //중심 좌표와 지도레벨을 정의 합니다.
+        var markerLayer;
+        var mark_lonlat, mark_size, mark_offset, mark_icon;     // marker information
+        var marker;
 
         function setVariables(){    
             cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
@@ -14,6 +17,21 @@
             zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
             mapW = '500px';  // 지도의 가로 크기 입니다. 
             mapH = '400px';  // 지도의 세로 크기 입니다. 
+
+            markerLayer = new Tmap.Layer.Markers();
+            mark_lonlat = new Tmap.LonLat(14135893.887852, 4518348.1852606);
+            mark_size = new Tmap.Size(24,38);
+            mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
+            mark_icon = new Tmap.Icon('https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png', mark_size, mark_offset);
+            marker = new Tmap.Marker(mark_lonlat, mark_icon);
+        }
+
+        function onOverMarker(evt){
+            console.log(evt);
+        }
+
+        function onClickMarker(evt){
+            document.getElementById("demo").innerHTML="내용";
         }
                  
         function init() {
@@ -23,6 +41,10 @@
             // Tmap,Map 클래스에 대한 상세 사항은 "JavaScript" 하위메뉴인 "기본 기능" 페이지를 참조 해주세요.
 
             map.setCenter(cLonLat,zoom);
+            map.addLayer(markerLayer);
+            markerLayer.addMarker(marker);
+            marker.events.register("mouseover",marker,onOverMarker);
+            marker.events.register("click", marker, onClickMarker);
         }  
     </script>
 </head>
@@ -31,6 +53,9 @@
     <a>hello</a>
     <p>start</p>
     <div id="map_div">
+    </div>
+    <div id="status">
+        <p id="demo"></>
     </div>
 
     <% @posted.each do |i| %>
