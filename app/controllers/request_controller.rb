@@ -30,9 +30,9 @@ class RequestController < ApplicationController
         cs = doc.css("cs")     # content size
         con = doc.css("con")   # content(raw data)
 
-        puts('lat : ' + lat)
-        puts('lng : ' + lng)
-        puts('dev_id : ' + dev_id)
+        puts('lat : ', lat)
+        puts('lng : ', lng)
+        puts('dev_id : ', dev_id)
 
         Req.create(content: notification_message)
     end
