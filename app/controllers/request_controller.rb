@@ -54,7 +54,7 @@ class RequestController < ApplicationController
 	sr_r = sr_r[0].text.split(">")
 	sr = sr_r[0]
         values_u = sr.split("/")
-	appeui = values_u[1]
+	app_eui = values_u[1]
         ltid_r = values_u[3]
 	ltid_r = ltid_r.split("-")
 	ltid = ltid_r[1]
@@ -89,10 +89,12 @@ class RequestController < ApplicationController
 
         puts('lat : ', lat)
         puts('lng : ', lng)
-	puts('appeui : ', appeui)
+	puts('app_eui : ', app_eui)
         puts('ltid : ', ltid)
 	puts('pm2_5 : ', pm2_5)
 	puts('pm10 : ', pm10)
+	
+	Request.create(ty:ty,ri:ri,rn:rn,pi:pi,ct:ct,lt:lt,gwl:gwl,lat:lat,lng:lng,geui:geui,sr:sr,app_eui:app_eui,ltid:ltid,et:et,st:st,cr:cr,cnf:cnf,cs:cs,con:con,PM2_5:pm2_5,PM10:pm10)
 
     end
 end

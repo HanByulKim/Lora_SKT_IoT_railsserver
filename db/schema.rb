@@ -10,10 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170714200530) do
+ActiveRecord::Schema.define(version: 20170716155842) do
 
   create_table "reqs", force: :cascade do |t|
     t.string   "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "requests", force: :cascade do |t|
+    t.integer  "ty"
+    t.string   "ri"
+    t.string   "rn"
+    t.string   "pi"
+    t.datetime "ct"
+    t.datetime "lt"
+    t.string   "gwl"
+    t.float    "lat"
+    t.float    "lng"
+    t.string   "geui"
+    t.string   "sr"
+    t.string   "app_eui"
+    t.string   "ltid"
+    t.datetime "et"
+    t.integer  "st"
+    t.string   "cr"
+    t.string   "cnf"
+    t.integer  "cs"
+    t.string   "con"
+    t.integer  "PM2_5"
+    t.integer  "PM10"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
