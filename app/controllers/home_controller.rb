@@ -16,7 +16,10 @@ class HomeController < ApplicationController
         #end
         
         #@res=request
-        @posted = Req.all
+        @count = Request.count
+        @posted = Request.all
+        @lat = Request.pluck(:lat)
+        @lng = Request.pluck(:lng)
         @skapi_uri = 'https://apis.skplanetx.com/tmap/js?version=1&format=javascript&appKey='
         @skapi_uri << String.try_convert(ENV['SK_APP_KEY'])
     end

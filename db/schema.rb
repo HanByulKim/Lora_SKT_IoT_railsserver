@@ -12,12 +12,6 @@
 
 ActiveRecord::Schema.define(version: 20170716155842) do
 
-  create_table "reqs", force: :cascade do |t|
-    t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "requests", force: :cascade do |t|
     t.integer  "ty"
     t.string   "ri"

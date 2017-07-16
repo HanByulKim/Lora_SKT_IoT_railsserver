@@ -9,21 +9,37 @@
         var cLonLat, zoom;      //중심 좌표와 지도레벨을 정의 합니다.
         var markerLayer;
         var mark_lonlat, mark_size, mark_offset, mark_icon;     // marker information
+        var mark_lng;
+        var mark_lat;
         var marker;
+        var mark_num;
+        var pr_3857;
+        var pr_4326;
 
         function setVariables(){    
             cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
             //중심점 좌표 입니다. EPSG3857 좌표계 형식 입니다. 
             zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
             mapW = '500px';  // 지도의 가로 크기 입니다. 
-            mapH = '400px';  // 지도의 세로 크기 입니다. 
+            mapH = '400px';  // 지도의 세로 크기 입니다.
+            mark_num = <%=@lng.count%>;
+
+            mark_lng=<%=raw @lng%>;
+            mark_lat=<%=raw @lat%>;
+            pr_3857 = new Tmap.Projection("EPSG:3857");     // korean coordinate sys
+            pr_4326 = new Tmap.Projection("EPSG:4326");     // wgs84 : gps coordinate sys
+            mark_lonlat = new Array(mark_num);
+            marker = new Array(mark_num);
 
             markerLayer = new Tmap.Layer.Markers();
-            mark_lonlat = new Tmap.LonLat(14135893.887852, 4518348.1852606);
             mark_size = new Tmap.Size(24,38);
             mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
             mark_icon = new Tmap.Icon('https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png', mark_size, mark_offset);
-            marker = new Tmap.Marker(mark_lonlat, mark_icon);
+
+            for(i=0; i < mark_num; i++){
+                mark_lonlat[i] = new Tmap.LonLat(mark_lng[i], mark_lat[i]).transform(pr_4326,pr_3857);
+                marker[i] = new Tmap.Markers(mark_lonlat[i], mark_icon, new Tmap.Label('<div>명동</div>'));
+            }
         }
 
         function onOverMarker(evt){
@@ -32,6 +48,7 @@
 
         function onClickMarker(evt){
             document.getElementById("demo").innerHTML="내용";
+            this.popup.show();
         }
                  
         function init() {
@@ -42,9 +59,11 @@
 
             map.setCenter(cLonLat,zoom);
             map.addLayer(markerLayer);
-            markerLayer.addMarker(marker);
-            marker.events.register("mouseover",marker,onOverMarker);
-            marker.events.register("click", marker, onClickMarker);
+            for(i=0; i<mark_num; i++){
+                markerLayer.addMarker(marker[i]);
+                marker[i].events.register("mouseover",marker[i],onOverMarker);
+                marker[i].events.register("click", marker[i], onClickMarker);
+            }
         }  
     </script>
 </head>
@@ -55,11 +74,8 @@
     <div id="map_div">
     </div>
     <div id="status">
-        <p id="demo"></>
+        <p id="demo"></p>
     </div>
-
-    <% @posted.each do |i| %>
-        <%= i.content %>
-        <br>
-    <% end %> 
+<br>
+    <p><%=@posted%></p>
 </body>
