@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
   get '/home/main' => 'home#main'
+  get '/home/story' => 'home#story'
   post '/data_receiver' => 'request#get_data'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

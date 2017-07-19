@@ -1,14 +1,82 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Workspace</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title>LoRa on Air</title>
 
-<%= yield %>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
 
-</body>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <style>
+    .center{
+      text-align: center;
+    }
+    .sk_orange{
+      background-color:#f6a826;
+    }
+  </style>
+  <body>
+      <nav>
+        <div class="sk_orange nav-wrapper" style="background-color:#f6a826;">
+          <a href="#" class="left brand-logo" style="margin-left:75px;">Logo</a>
+          <ul id="nav-mobile" class="left hide-on-med-and-down">
+            <li><a href="sass.html">Sass</a></li>
+            <li><a href="badges.html">Components</a></li>
+            <li><a href="collapsible.html">JavaScript</a></li>
+          </ul>
+        </div>
+      </nav>
+
+    <!--Import jQuery before materialize.js-->
+
+    <ul id="slide-out" class="side-nav fixed" style="background-color: #161100;">
+      <li><div class="userView">
+        <img src="/SK_Logo.png" style="width:52px; height: 47px;>
+        <a href="#!user"><img class="circle" src="http://placehold.it/350x300"></a>
+        <a href="#!name"><span class="white-text center name">김순자</span></a>
+      </div></li>
+      <li><div class="divider"></div></li>
+      <li class="center">
+        <a class="subheader"><span class="white-text">현재</span></a>
+        <a href="#!"><span class="white-text">09:35</span></a>
+      </li>
+      <li class="center">
+        <a href="#!"><span class="white-text">서울시</span></a>
+        <a href="#!"><span class="white-text">관악구</span></a>
+      </li>
+      <li class="center">
+        <a class="subheader"><span class="white-text">미세먼지</span></a>
+        <a href="#!"><span class="white-text">나쁨</span></a>
+        <a href="#!"><span class="white-text">151</span></a>
+      </li>
+      <li class="center">
+        <a class="subheader"><span class="white-text">날씨</span></a>
+        <a href="#!"><i class="material-icons" style="color:white;">cloud</i></a>
+      </li>
+      <li class="center">
+        <a class="subheader"><span class="white-text">기온</span></a>
+        <a href="#!"><span class="white-text">26도</span></a>
+      </li>
+      <!--
+      <li><a href="#!email"><span class="white-text email">jdandturk@gmail.com</span></a></li>
+      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+      -->
+    </ul>
+
+    <div style="margin-left:70px">
+      <%= yield %>
+    </div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
+
+  </body>
 </html>

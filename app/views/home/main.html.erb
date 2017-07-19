@@ -19,7 +19,7 @@
         function setVariables(){    
             cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
             //중심점 좌표 입니다. EPSG3857 좌표계 형식 입니다. 
-            zoom = 16;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
+            zoom = 10;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
             mapW = '500px';  // 지도의 가로 크기 입니다. 
             mapH = '400px';  // 지도의 세로 크기 입니다.
             mark_num = <%=@lng.count%>;
@@ -34,7 +34,7 @@
             markerLayer = new Tmap.Layer.Markers();
             mark_size = new Tmap.Size(24,38);
             mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
-            mark_icon = new Tmap.Icon('https://developers.skplanetx.com/upload/tmap/marker/pin_b_m_a.png', mark_size, mark_offset);
+            mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
 
             for(i=0; i < mark_num; i++){
                 mark_lonlat[i] = new Tmap.LonLat(mark_lng[i], mark_lat[i]).transform(pr_4326,pr_3857);
@@ -57,13 +57,13 @@
             // div : 지도가 생성될 div의 id값과 같은 값을 옵션으로 정의 합니다.
             // Tmap,Map 클래스에 대한 상세 사항은 "JavaScript" 하위메뉴인 "기본 기능" 페이지를 참조 해주세요.
 
-            map.setCenter(cLonLat,zoom);
             map.addLayer(markerLayer);
             for(i=0; i<mark_num; i++){
                 markerLayer.addMarker(marker[i]);
-                marker[i].events.register("mouseover",marker[i],onOverMarker);
-                marker[i].events.register("click", marker[i], onClickMarker);
+                //marker[i].events.register("mouseover",marker[i],onOverMarker);
+                //marker[i].events.register("click", marker[i], onClickMarker);
             }
+            map.setCenter(cLonLat,zoom);
         }  
     </script>
 </head>
