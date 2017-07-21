@@ -2,7 +2,8 @@ class HomeController < ApplicationController
     require 'rest-client'
 
     def main
-        uri = URI('https://thingplugpf.sktiot.com:9443/0240771000000174/v1_0/remoteCSE-00000174d02544fffef01031/container-LoRa/latest')
+        ApplicationController.new.weather
+        #uri = URI('https://thingplugpf.sktiot.com:9443/0240771000000174/v1_0/remoteCSE-00000174d02544fffef01031/container-LoRa/latest')
        # http = Net::HTTP.new(uri.host, uri.port)
     #    http.use_ssl = true
     #    http.verify_mode = OpenSSL::SSL::VERIFY_NONE

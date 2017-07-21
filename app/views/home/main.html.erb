@@ -16,11 +16,18 @@
         var pr_3857;
         var pr_4326;
 
-        function setVariables(){    
+        var dev_width;
+
+        function setVariables(){
+            // device width
+            dev_width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+            dev_width = dev_width - 70;
+            dev_width = dev_width.toString();
+
             cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
             //중심점 좌표 입니다. EPSG3857 좌표계 형식 입니다. 
             zoom = 10;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
-            mapW = '500px';  // 지도의 가로 크기 입니다. 
+            mapW = dev_width + 'spx';  // 지도의 가로 크기 입니다. 
             mapH = '400px';  // 지도의 세로 크기 입니다.
             mark_num = <%=@lng.count%>;
 
@@ -69,13 +76,10 @@
 </head>
 
 <body onload="init()">
-    <a>hello</a>
-    <p>start</p>
+<p><%=@json%></p>
     <div id="map_div">
     </div>
     <div id="status">
         <p id="demo"></p>
     </div>
-<br>
-    <p><%=@posted%></p>
 </body>
