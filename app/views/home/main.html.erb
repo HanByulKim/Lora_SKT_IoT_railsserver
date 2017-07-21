@@ -8,9 +8,10 @@
         var mapW, mapH;     // 지도의 가로, 세로 크기(Pixel단위) 를 지정 합니다. 
         var cLonLat, zoom;      //중심 좌표와 지도레벨을 정의 합니다.
         var markerLayer;
-        var mark_lonlat, mark_size, mark_offset, mark_icon;     // marker information
+        var mark_lonlat;     // marker information
         var mark_lng;
         var mark_lat;
+        var mark_label;
         var marker;
         var mark_num;
         var pr_3857;
@@ -26,27 +27,57 @@
 
             cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
             //중심점 좌표 입니다. EPSG3857 좌표계 형식 입니다. 
-            zoom = 10;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
+            zoom = 8;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
             mapW = dev_width + 'spx';  // 지도의 가로 크기 입니다. 
             mapH = '400px';  // 지도의 세로 크기 입니다.
             mark_num = <%=@lng.count%>;
 
             mark_lng=<%=raw @lng%>;
             mark_lat=<%=raw @lat%>;
+            //mark_label=<%=raw @label%>;
+            mark_label=[15,16,17];
             pr_3857 = new Tmap.Projection("EPSG:3857");     // korean coordinate sys
             pr_4326 = new Tmap.Projection("EPSG:4326");     // wgs84 : gps coordinate sys
+
             mark_lonlat = new Array(mark_num);
-            marker = new Array(mark_num);
-
-            markerLayer = new Tmap.Layer.Markers();
-            mark_size = new Tmap.Size(24,38);
-            mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
-            mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
-
             for(i=0; i < mark_num; i++){
                 mark_lonlat[i] = new Tmap.LonLat(mark_lng[i], mark_lat[i]).transform(pr_4326,pr_3857);
-                marker[i] = new Tmap.Markers(mark_lonlat[i], mark_icon, new Tmap.Label('<div>명동</div>'));
             }
+        }
+
+        function setLayers(){
+            markerLayer = new Tmap.Layer.Markers("MarkerLayer");
+            map.addLayer(markerLayer);
+        }
+
+        function addMarker(lonlat,label){
+            var mark_size = new Tmap.Size(24,38);
+            var mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
+            var mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
+            var marker = new Tmap.Markers(lonlat,mark_icon,label);
+            
+            markerLayer.addMarker(marker);
+            marker.events.register("mouseover", marker, onOverMouse);
+            marker.events.register("mouseout", marker, onOutMouse);
+        }
+    
+        function init() {
+            setVariables();
+            map = new Tmap.Map({div:'map_div', width:mapW, height:mapH, animation:true}); 
+            // div : 지도가 생성될 div의 id값과 같은 값을 옵션으로 정의 합니다.
+            // Tmap,Map 클래스에 대한 상세 사항은 "JavaScript" 하위메뉴인 "기본 기능" 페이지를 참조 해주세요.
+
+            setLayers();
+            map.setCenter(cLonLat,zoom);
+
+            setMarker();
+        }
+
+        function onOverMouse(e){
+            this.popup.show();
+        }
+        function onOutMouse(e){
+            this.popup.hide();
         }
 
         function onOverMarker(evt){
@@ -57,26 +88,16 @@
             document.getElementById("demo").innerHTML="내용";
             this.popup.show();
         }
-                 
-        function init() {
-            setVariables();
-            map = new Tmap.Map({div:'map_div', width:mapW, height:mapH, animation:true}); 
-            // div : 지도가 생성될 div의 id값과 같은 값을 옵션으로 정의 합니다.
-            // Tmap,Map 클래스에 대한 상세 사항은 "JavaScript" 하위메뉴인 "기본 기능" 페이지를 참조 해주세요.
 
-            map.addLayer(markerLayer);
-            for(i=0; i<mark_num; i++){
-                markerLayer.addMarker(marker[i]);
-                //marker[i].events.register("mouseover",marker[i],onOverMarker);
-                //marker[i].events.register("click", marker[i], onClickMarker);
+        function setMarker(){
+            for(var i=0; i<mark_num; i++){
+                addMarker(mark_lonlat[i],new Tmap.Label(mark_label[i]));
             }
-            map.setCenter(cLonLat,zoom);
-        }  
+        }
     </script>
 </head>
 
 <body onload="init()">
-<p><%=@json%></p>
     <div id="map_div">
     </div>
     <div id="status">
