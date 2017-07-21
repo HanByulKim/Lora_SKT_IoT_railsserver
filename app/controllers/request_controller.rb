@@ -83,7 +83,7 @@ class RequestController < ApplicationController
 	    con_r = con_r[0].text.split(">")
 	    con = con_r[0]
 
-	    val_r = con.split("1104")
+	    val_r = con.split("1109")
 	    pm2_5 = val_r[1].to_i(16)
 	    pm10 = val_r[2].to_i(16)
 
