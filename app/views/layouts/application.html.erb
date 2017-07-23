@@ -53,16 +53,28 @@
       <li class="center">
         <a class="subheader"><span class="white-text">서울시</span></a>
         <a href="#!"><span class="white-text">관악구</span></a>
-	<a href="#!"><span class="white-text">대학동</span></a>
+	      <a href="#!"><span class="white-text">대학동</span></a>
       </li>
       <li class="center">
         <a class="subheader"><span class="white-text">미세먼지</span></a>
-        <a href="#!"><span class="white-text">나쁨</span></a>
-        <a href="#!"><span class="white-text">151</span></a>
+	      <% if weather[3] <= 50 %>
+          <a href="#!"><span class="green-text">좋음</span></a>
+          <a href="#!"><span class="green-text"><%=weather[3]%></span></a>
+	      <% elsif weather[3] <= 100 %>
+          <a href="#!"><span class="yellow-text">조금나쁨</span></a>
+          <a href="#!"><span class="yellow-text"><%=weather[3]%></span></a>
+	      <% elsif weather[3] <= 150 %>
+          <a href="#!"><span class="red-text">나쁨</span></a>
+          <a href="#!"><span class="red-text"><%=weather[3]%></span></a>
+	      <% else %>
+          <a href="#!"><span class="purple-text">매우나쁨</span></a>
+          <a href="#!"><span class="purple-text"><%=weather[3]%></span></a>
+        <% end %>
       </li>
       <li class="center">
         <a class="subheader"><span class="white-text">날씨</span></a>
-	<% if weather[1] == "SKY_A06" %>
+        <a href="#!"><span class="white-text"><%=weather[0]%></span></a>
+	      <% if weather[1] == "SKY_A06" %>
           <a href="#!" style="width:100%; text-align:center"><i class="material-icons" style="color:white;">cloud</i></a>
         <% elsif weather[1] == "SKY_A07" %>
           <a href="#!" style="width:100%; text-align:center"><i class="material-icons" style="color:white;">cloud</i></a>

@@ -59,6 +59,7 @@
             markerLayer.addMarker(marker);
             marker.events.register("mouseover", marker, onOverMouse);
             marker.events.register("mouseout", marker, onOutMouse);
+            marker.events.register("click", marker, onClickMouse);
         }
     
         function init() {
@@ -78,6 +79,9 @@
         }
         function onOutMouse(e){
             this.popup.hide();
+        }
+        function onClickMouse(e){
+            document.getElementById("demo").innerHTML="내용";
         }
 
         function onOverMarker(evt){

@@ -18,6 +18,8 @@ class ApplicationController < ActionController::Base
       weather_data.push(sky_stat)
       weather_data.push(sky_code)
       weather_data.push(temperature)
+      #find device id
+      weather_data.push(Request.last.PM10)
 
       return weather_data
   end
