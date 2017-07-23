@@ -16,7 +16,6 @@ class HomeController < ApplicationController
           #request = http.request request # Net::HTTPResponse object
         #end
         
-        #@res=request
         @count = Request.count
         @posted = Request.all
         @lat = Request.pluck(:lat)
