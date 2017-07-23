@@ -34,8 +34,7 @@
 
             mark_lng=<%=raw @lng%>;
             mark_lat=<%=raw @lat%>;
-            //mark_label=<%=raw @label%>;
-            mark_label=[15,16,17];
+            mark_label=<%=raw @label%>;
             pr_3857 = new Tmap.Projection("EPSG:3857");     // korean coordinate sys
             pr_4326 = new Tmap.Projection("EPSG:4326");     // wgs84 : gps coordinate sys
 
@@ -53,8 +52,20 @@
         function addMarker(lonlat,label){
             var mark_size = new Tmap.Size(24,38);
             var mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
-            var mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
-            var marker = new Tmap.Markers(lonlat,mark_icon,label);
+            var mark_icon;
+            var marker = new Tmap.Markers(lonlat,mark_icon,new Tmap.Label(label));
+            if(label <50){
+                mark_icon = new Tmap.Icon('/inbev_green.png', mark_size, mark_offset);
+            }
+            if(label <100){
+                mark_icon = new Tmap.Icon('/inbev_yellow.png', mark_size, mark_offset);
+            }
+            if(label <150){
+                mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
+            }
+            else{
+                mark_icon = new Tmap.Icon('/inbev_purple.png', mark_size, mark_offset);
+            }
             
             markerLayer.addMarker(marker);
             marker.events.register("mouseover", marker, onOverMouse);
@@ -95,7 +106,7 @@
 
         function setMarker(){
             for(var i=0; i<mark_num; i++){
-                addMarker(mark_lonlat[i],new Tmap.Label(mark_label[i]));
+                addMarker(mark_lonlat[i],mark_label[i]);
             }
         }
     </script>
