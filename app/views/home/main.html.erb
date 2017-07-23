@@ -53,7 +53,6 @@
             var mark_size = new Tmap.Size(24,38);
             var mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
             var mark_icon;
-            var marker = new Tmap.Markers(lonlat,mark_icon,new Tmap.Label(label));
             if(label <50){
                 mark_icon = new Tmap.Icon('/inbev_green.png', mark_size, mark_offset);
             }
@@ -66,6 +65,7 @@
             else{
                 mark_icon = new Tmap.Icon('/inbev_purple.png', mark_size, mark_offset);
             }
+            var marker = new Tmap.Markers(lonlat,mark_icon,new Tmap.Label(label));
             
             markerLayer.addMarker(marker);
             marker.events.register("mouseover", marker, onOverMouse);
