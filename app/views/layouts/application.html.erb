@@ -28,14 +28,15 @@
       <div class="sk_orange nav-wrapper" style="background-color:#f6a826;">
         <a href="#" class="left brand-logo" style="margin-left:75px;">Air Tok</a>
         <ul id="nav-mobile" class="left hide-on-med-and-down">
-          <li><a href="sass.html">Sass</a></li>
+          <!--<li><a href="sass.html">Sass</a></li>
           <li><a href="badges.html">Components</a></li>
-          <li><a href="collapsible.html">JavaScript</a></li>
-        </ul22>
+          <li><a href="collapsible.html">JavaScript</a></li>-->
+        </ul>
       </div>
     </nav>
 
-    <% weather = weather() %>
+    </% weather = weather() %>
+    <% weather = [1,2,3,4] %>
     <!--Import jQuery before materialize.js-->
 
     <ul id="slide-out" class="side-nav fixed" style="background-color: #161100;">
@@ -48,7 +49,7 @@
       <li><div class="divider"></div></li>
       <li class="center">
         <a class="subheader"><span class="white-text">현재</span></a>
-        <a href="#!"><span class="white-text">09:35</span></a>
+        <a href="#!"><span class="white-text"><%=Time.now().strftime("%H:%M")%></span></a>
       </li>
       <li class="center">
         <a class="subheader"><span class="white-text">서울시</span></a>

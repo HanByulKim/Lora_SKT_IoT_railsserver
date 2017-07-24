@@ -5,21 +5,47 @@
         background-repeat: no-repeat;
         background-size: contain;
     }
+    img {
+        width: 100%;
+    }
 </style>
 <body>
-    <div class="carousel carousel-slider center" data-indicators="true">
+    <script>
+        dev_width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+        dev_width = dev_width - 70;
+        dev_width = dev_width.toString();
+    </script>
+
+    <div class="carousel carousel-slider center" data-indicators="true" style="height:611.86px;";>
         <div class="carousel-fixed-item center">
             <!--<a class="btn waves-effect white grey-text darken-text-2">button</a>-->
         </div>
-        <div class="carousel-item car-fit white-text" href="#one!" style="background-image:url('/story_list.png');">
+        <div class="carousel-item white-text" href="#one!">
+            <img src="/story_story.png">
         </div>
-        <div class="carousel-item car-fit white-text" href="#two!" style="background-image:url('/noti_jung_list.png');">
+        <div class="carousel-item white-text" href="#two!">
+            <img src="/noti_jung_story.png">
         </div>
-        <div class="carousel-item car-fit white-text" href="#three!" style="background-image:url('/noti_sulhyeon_list.png');">
+        <div class="carousel-item white-text" href="#three!">
+            <img src="/noti_sulhyeon_story.png">
         </div>
     </div>
 
     <script>
-        $('.carousel.carousel-slider').carousel({fullWidth: true});
+        function init_car(){
+            dev_width = (window.innerWidth > 0) ? window.innerWidth : screen.width
+            dev_width = dev_width - 70;
+            dev_width = dev_width.toString();
+
+            dev_height = (window.innerHeight > 0) ? window.innerHeight : screen.height
+            dev_height = dev_height - 70;
+            dev_height = dev_height.toString();
+            console.log(dev_width);
+            console.log(dev_height);
+            document.getElementById("story_car").style.width = dev_width + 'px';
+            document.getElementById("story_car").style.height = dev_height + 'px';
+            
+        }
+        $('.carousel.carousel-slider').carousel();
     </script>
 </body>
