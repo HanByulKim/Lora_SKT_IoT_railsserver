@@ -10,13 +10,8 @@
         background-repeat: no-repeat;
         background-size: contain;
     }
-    img {
-        width: 100%;
-    }
 </style>
 <body>
-    <a id="kakao-login-btn"></a>
-    <a href="http://developers.kakao.com/logout"></a>
 
     <div id="myCarousel" class="carousel slide" data-ride="carousel" style="height:auto;">
         <!-- Indicators -->
@@ -51,6 +46,11 @@
             <span class="sr-only">Next</span>
         </a>
     </div>
+    <div style="margin-top:5px;text-align:right;">
+        <a id="kakao-link-btn" href="javascript:;">
+            <img src="//developers.kakao.com/assets/img/about/logos/kakaolink/kakaolink_btn_small.png"/>
+        </a>
+    </div>
 
     <script type="text/javascript" src="components/bootstrap/dist/js/bootstrap.js">
         function init_car(){
@@ -67,21 +67,5 @@
             document.getElementById("story_car").style.height = dev_height + 'px';
             
         }
-    </script>
-    <script type='text/javascript'>
-      //<![CDATA[
-        // 사용할 앱의 JavaScript 키를 설정해 주세요.
-        Kakao.init('<%=ENV['KAKAO_APP_KEY']%>');
-        // 카카오 로그인 버튼을 생성합니다.
-        Kakao.Auth.createLoginButton({
-          container: '#kakao-login-btn',
-          success: function(authObj) {
-            alert(JSON.stringify(authObj));
-          },
-          fail: function(err) {
-             alert(JSON.stringify(err));
-          }
-        });
-      //]]>
-    </script>
+    </script>  
 </body>
