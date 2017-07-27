@@ -36,8 +36,8 @@
       </div>
     </nav>
 
-    </% weather = weather() %>
-    <% weather = [1,2,3,4] %>
+    <% weather = weather() %>
+    </% weather = [1,2,3,4] %>
     <!--Import jQuery before materialize.js-->
 
     <ul id="slide-out" class="side-nav fixed" style="background-color: #161100;">
@@ -76,11 +76,13 @@
       <li class="center">
         <a class="subheader"><span class="white-text">날씨</span></a>
         <a href="#!"><span class="white-text"><%=weather[0]%></span></a>
-	      <% if weather[1] == "SKY_A06" %>
+	<!--
+	</% if weather[1] == "SKY_A06" %>
           <a href="#!" style="width:100%; text-align:center"><i class="material-icons" style="color:white;">cloud</i></a>
-        <% elsif weather[1] == "SKY_A07" %>
+        </% elsif weather[1] == "SKY_A07" %>
           <a href="#!" style="width:100%; text-align:center"><i class="material-icons" style="color:white;">cloud</i></a>
-        <% end %>
+        </% end %>
+	-->
       </li>
       <li class="center">
         <a class="subheader"><span class="white-text">기온</span></a>
