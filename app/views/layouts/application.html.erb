@@ -59,13 +59,13 @@
       </li>
       <li class="center">
         <a class="subheader"><span class="white-text">미세먼지</span></a>
-	      <% if weather[3] <= 50 %>
+	      <% if weather[3] <= 30 %>
           <a href="#!"><span class="green-text">좋음</span></a>
           <a href="#!"><span class="green-text"><%=weather[3]%></span></a>
-	      <% elsif weather[3] <= 100 %>
+	      <% elsif weather[3] <= 60 %>
           <a href="#!"><span class="yellow-text">조금나쁨</span></a>
           <a href="#!"><span class="yellow-text"><%=weather[3]%></span></a>
-	      <% elsif weather[3] <= 150 %>
+	      <% elsif weather[3] <= 100 %>
           <a href="#!"><span class="red-text">나쁨</span></a>
           <a href="#!"><span class="red-text"><%=weather[3]%></span></a>
 	      <% else %>

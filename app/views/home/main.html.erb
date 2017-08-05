@@ -3,10 +3,10 @@
     <title>simpleMap</title>
     <script src="<%=@skapi_uri%>"></script>
     <script type="text/javascript">
- 
+
         var map;
-        var mapW, mapH;     // 지도의 가로, 세로 크기(Pixel단위) 를 지정 합니다. 
-        var cLonLat, zoom;      //중심 좌표와 지도레벨을 정의 합니다.
+        var mapW, mapH; // 지도의 가로, 세로 크기(Pixel단위) 를 지정 합니다. 
+        var cLonLat, zoom; //중심 좌표와 지도레벨을 정의 합니다.
         var markerLayer;
         var mark_lonlat;     // marker information
         var mark_lng;
@@ -25,23 +25,36 @@
             dev_width = dev_width - 70;
             dev_width = dev_width.toString();
 
-            cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);  
+            //cLonLat = new Tmap.LonLat(14135912.880612050, 4518334.160091842);
+		cLonLat = new Tmap.LonLat(14132167.0588,4504561.74987);
             //중심점 좌표 입니다. EPSG3857 좌표계 형식 입니다. 
-            zoom = 8;  // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
-            mapW = dev_width + 'px';  // 지도의 가로 크기 입니다. 
-            mapH = '400px';  // 지도의 세로 크기 입니다.
+            zoom = 12; // zoom level입니다.  0~19 레벨을 서비스 하고 있습니다. 
+            mapW = dev_width + 'px'; // 지도의 가로 크기 입니다. 
+            mapH = '400px'; // 지도의 세로 크기 입니다.
             mark_num = <%=@lng.count%>;
 
-            mark_lng=<%=raw @lng%>;
-            mark_lat=<%=raw @lat%>;
-            mark_label=<%=raw @label%>;
+            //mark_lng=<%=raw @lng%>;
+            //mark_lat=<%=raw @lat%>;
+            //mark_label=<%=raw @label%>;
             pr_3857 = new Tmap.Projection("EPSG:3857");     // korean coordinate sys
             pr_4326 = new Tmap.Projection("EPSG:4326");     // wgs84 : gps coordinate sys
 
-            mark_lonlat = new Array(mark_num);
-            for(i=0; i < mark_num; i++){
-                mark_lonlat[i] = new Tmap.LonLat(mark_lng[i], mark_lat[i]).transform(pr_4326,pr_3857);
-            }
+            //mark_lonlat = new Array(mark_num);
+            //for(i=0; i < mark_num; i++){
+            //    mark_lonlat[i] = new Tmap.LonLat(mark_lng[i], mark_lat[i]).transform(pr_4326,pr_3857);
+            //}
+                // for competition
+                mark_lonlat = new Array(4);
+                mark_lonlat[0] = new Tmap.LonLat(<%=@f01006.lng%>,<%=@f01006.lat%>).transform(pr_4326,pr_3857);
+                mark_lonlat[1] = new Tmap.LonLat(<%=@f01036.lng%>,<%=@f01036.lat%>).transform(pr_4326,pr_3857);
+                mark_lonlat[2] = new Tmap.LonLat(<%=@f01033.lng%>,<%=@f01033.lat%>).transform(pr_4326,pr_3857);
+                mark_lonlat[3] = new Tmap.LonLat(<%=@f01031.lng%>,<%=@f01031.lat%>).transform(pr_4326,pr_3857);
+
+                mark_label = new Array(4);
+                mark_label[0] = <%=@f01006.PM10%>;
+                mark_label[1] = <%=@f01036.PM10%>;
+                mark_label[2] = <%=@f01033.PM10%>;
+                mark_label[3] = <%=@f01031.PM10%>;
         }
 
         function setLayers(){
@@ -53,13 +66,13 @@
             var mark_size = new Tmap.Size(24,38);
             var mark_offset = new Tmap.Pixel(-(mark_size.w/2), -(mark_size.h/2));
             var mark_icon;
-            if(label <50){
+            if(label <30){
                 mark_icon = new Tmap.Icon('/inbev_green.png', mark_size, mark_offset);
             }
-            else if(label <100){
+            else if(label <50){
                 mark_icon = new Tmap.Icon('/inbev_yellow.png', mark_size, mark_offset);
             }
-            else if(label <150){
+            else if(label <70){
                 mark_icon = new Tmap.Icon('/inbev_red.png', mark_size, mark_offset);
             }
             else{
@@ -72,8 +85,8 @@
             marker.events.register("mouseout", marker, onOutMouse);
             marker.events.register("click", marker, onClickMouse);
         }
-    
-        function init() {
+        
+	function init() {
             setVariables();
             map = new Tmap.Map({div:'map_div', width:mapW, height:mapH, animation:true}); 
             // div : 지도가 생성될 div의 id값과 같은 값을 옵션으로 정의 합니다.
@@ -105,7 +118,8 @@
         }
 
         function setMarker(){
-            for(var i=0; i<mark_num; i++){
+            //for(var i=0; i<mark_num; i++){
+		for(var i=0; i<4; i++){
                 addMarker(mark_lonlat[i],mark_label[i]);
             }
         }
